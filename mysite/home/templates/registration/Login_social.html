@@ -1,0 +1,33 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<style>
+  body {
+  background-color: #aefff1;
+}
+</style>
+<h1 style="text-align: center;">Login</h1>
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" , style="margin-left: 400px; margin-right: 400px;margin-top: 75px;">
+{% csrf_token %}
+{{ form|crispy }}
+<input type="submit" class="btn btn-dark btn-sm" value="Login" />
+<input type="hidden" name="next" value="{{ next }}" />
+
+{% if settings.SOCIAL_AUTH_GITHUB_KEY %}
+<hr/>
+<a class="btn btn-info btn-sm" role="button" href="{% url 'social:begin' 'github' %}?next={{ next }}">
+  <i class="fa fa-github" aria-hidden="true"></i>Login with GitHub
+</a>
+{% endif %}
+<p>Don't have an account click<a href="{% url 'home:register' %}"> here </a></p>
+<!--<botton type="submit" class="btn btn-dark btn-sm">Login</botton>
+<input type="hidden" name="next" value="{{next}}"-->
+</form>
+{% endblock %}
+
+

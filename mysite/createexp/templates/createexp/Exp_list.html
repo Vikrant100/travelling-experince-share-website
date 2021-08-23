@@ -1,0 +1,64 @@
+{% extends "base_menu.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {
+      background-color: #aefff1;
+      margin-top: 100px;
+      }
+     
+    </style>
+    </head>
+<div style="float:right; margin-top : 500px ; margin-right: -80px;">
+    <!-- https://www.w3schools.com/howto/howto_css_search_button.asp -->
+    <form>
+        <input class="form-control-static"  type="text" placeholder="Search.." name="search"
+        {% if search %} value="{{ search }}" {% endif %}>
+        <button class ="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+        <a class= "btn btn-dark" href="#"><i class="fa fa-undo"></i></a>
+    </form>
+</div> 
+<body>
+    <div class="container">
+    <p style="font-family: Sofia, sans-serif;font-size: 30px; text-align: center; color: #067251;">Read Experiences share by others before actually Experiencing things</p>
+{% if Exp_list %}
+<ul style="list-style-type:square;">
+    {% for Exp in Exp_list %}
+    <li>
+        <a href="{% url 'createexp:Exp_detail'  Exp.id %}" , style="font-family: 'Itim', cursive; font-size: 25px ;color:#067251 ;text-decoration: none; ">{{ Exp.title }}</a>
+        {% if Exp.user == user %}
+        (<a href="{% url 'createexp:Exp_update' Exp.id %}" data-toggle="tooltip" class="tip-top" title="Default tooltip" ><i style = "color: black; margin-left: 4px;" class="fa fa-pencil fa-sm"  aria-hidden="true"></i></a>
+        | <a href="{% url 'createexp:Exp_delete' Exp.id %}"><i class="fa fa-trash" style="color: black;"></i></a>)
+        {% endif %}
+        <div style="left:10px" >
+            {% if Exp.body|length < 100 %}
+                {{ Exp.body }}
+            {% else %}
+                {{ Exp.body|slice:"0:99" }}
+                <a href="{% url 'createexp:Exp_detail'  Exp.id %}" , style= "color:black ;text-decoration: none;">Read more...</a>
+            {% endif %}
+            
+           
+        </div>
+        <small>
+            {% if Exp.owner.username %}
+                posted by {{ Exp.owner.username }}
+            {% endif %}
+            {{ Exp.natural_updated }}
+        </small>
+
+    </li>
+    {% endfor %}
+</ul>
+    
+{% endif %}
+</div>
+</body>
+</html>
+{% endblock content %}
+
+

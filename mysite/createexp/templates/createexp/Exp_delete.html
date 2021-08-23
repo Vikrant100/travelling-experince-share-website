@@ -1,0 +1,22 @@
+{% extends "base_menu.html" %}
+{% block content %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {
+      background-color: #aefff1;
+      margin-top: 100px;
+      }
+     
+    </style>
+  </head> 
+<body>
+<p style="font-family: Sofia, sans-serif;font-size: 25px; text-align: center; color: #067251;">Are you sure you want to delete the Experience ?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input class="btn btn-dark btn-sm center-block"  type="submit" value="Yes, delete.">
+</form>
+</body>
+{% endblock %}

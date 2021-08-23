@@ -1,0 +1,16 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<style>
+  body {
+  background-color: #aefff1;
+}
+</style>
+<h1 style="text-align: center;">Create An Account</h1>
+<form method="POST" class="form-group", style="margin-left: 400px; margin-right: 400px;">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type= "submit" class = "btn-dark btn-sm">Signup</button>
+</form>
+{% endblock %}

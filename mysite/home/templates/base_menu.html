@@ -1,0 +1,54 @@
+{% extends "base_bootstrap.html" %}
+{% block navbar %}
+{% load app_tags %}
+<style>
+  .navbar{
+    padding-bottom: 10px;
+  }
+  .nav-item{
+    margin-right: 50px;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top ", style="background-color: #1debad;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/", style="font-family: Sofia, sans-serif;font-size: 30px;margin-right: 600px">FirstOne</a>
+      </div>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{% url 'createexp:Exp_list' %}", style="color: black;">Experiences</a></li>
+        <li class="nav-item"><a class="nav-link" href="#", style="color: black;">Link2</a></li>
+        <li class="nav-item"><a class="nav-link" href="#", style="color: black;">Link3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"></ul>
+      {%if user.is_authenticated%}
+      <div class = "dropdown"> 
+        <li class="dropdown " style="list-style-type: none;">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle ">
+            <img style="width: 25px;" src="{{ user|gravatar:60 }}"/><b class="caret"></b>
+          </a> 
+          <ul class="dropdown-menu">
+              <li><a href="{% url 'logout' %}",style="color: black;text-decoration:none">Logout</a></li>
+              <li><a href="#",style="color: black;text-decoration:none">Profile</a></li>
+          </ul>
+        </li>
+      </div>
+      {%else%}
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-dark"><a class="nav-link" href="{% url 'login' %}", style="color: black;text-decoration: none;">Login</button></a>
+        <button type="button" class="btn btn-outline-dark"><a class="nav-link" href="{% url 'home:register'%}", style="color: black;text-decoration: none;">Signup</button></a>
+      </div>
+      {%endif%}
+    </div>
+  </nav>
+  {%endblock%}
+      <!--<div class="btn-group">
+        <button type="button" class="btn btn-outline-dark"><a class="nav-link" href="{% url 'login' %}", style="color: black;text-decoration: none;">Login</button></a>
+        <button type="button" class="btn btn-outline-dark"><a class="nav-link" href="{% url 'home:register'%}", style="color: black;text-decoration: none;">Signup</button></a>
+      </div>
+    </div>-->
+  <!--<form>
+    <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" >
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
+  </form>
+</nav>-->
+
